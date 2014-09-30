@@ -21,7 +21,7 @@ function LoadScripts() {
     localStorage.date = now.getDate() + "/" + (now.getMonth() + 1).toString() + "/" + now.getFullYear();
     localStorage.favs = localStorage.favs == null ? "" : localStorage.favs;
     //localStorage.favs = "";
-    //alert(localStorage.favs);
+    //f(localStorage.favs);
     //localStorage.lang = localStorage.favs == null ? localStorage.favs : "";
 
     $(".link").on("vclick", function () {
@@ -109,24 +109,39 @@ function AttachShowMoreHandlers() {
 
 function AttachAddToFavouritesHandlers() {
     $(".addToFavourites").on("vclick", function () {
-        if (confirm("Are you sure you want to add this item to favourites")) {
-            if (typeof (Storage) !== "undefined") {
-                var favID = $(this).attr("id").split('_')[0];
-                if (!checkIfInLocalStorage(favID)) {
-                    var items = localStorage.favs;
-                    items = items + favID + ';';
-                    localStorage.favs = items;
-                    //alert("Added to Favourites");
-                }
-                else {
-                    alert("Already in Favourites");
-                }
-            }
-            else {
-                alert("Sorry! No Local Storage support..");
-            }
-        }
+                             var favID = $(this).attr("id").split('_')[0];
+                             navigator.notification.confirm(
+                                                            'Are you sure you want to add this item to favourites?',  // message
+                                                            function(button){
+                                                                onConfirm(button, favID);
+                                                            },              // callback to invoke with index of button pressed
+                                                            'Favourites Notification',            // title
+                                                            'OK ,Cancel'          // buttonLabels
+                                                            );
     });
+}
+
+function onConfirm(button, favID) {
+ if(button != 2)
+ {
+    
+    if (typeof (Storage) !== "undefined") {
+        //var favID = $(this).attr("id").split('_')[0];
+        if (!checkIfInLocalStorage(favID)) {
+            var items = localStorage.favs;
+            items = items + favID + ';';
+            localStorage.favs = items;
+            //alert("Added to Favourites");
+        }
+        else {
+            navigator.notification.alert("Already in Favourites");
+           //navigator.notification.alert("Already in Favourites", alertCallback, "Favourites Info", "Done");
+        }
+    }
+    else {
+        navigator.notification.alert("Sorry! No Local Storage support..");
+    }
+ }
 }
 
 function AttachRemoveFromFavouritesHandlers() {
@@ -141,7 +156,7 @@ function AttachRemoveFromFavouritesHandlers() {
                 $("#" + favID + "_" + $(this).attr("id").split('_')[1]).addClass("hide");
             }
             else {
-                alert("Sorry! No Local Storage support..");
+                navigator.notification.alert("Sorry! No Local Storage support..");
             }
         }
     });
@@ -207,7 +222,7 @@ function getFirstImage() {
 
 
     var image = "images/startImage/" + lang + "_" + getOrientation(aspect) + "_" + getAspect(pixelRatio) + ".png";
-    alert(image);
+    navigator.notification.alert(image);
     return image;
 
 }
@@ -248,12 +263,46 @@ function callAjaxHome() {
         error: function (error) {
             //console.log('error');
             //console.log(error);
-            if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                callAjaxHome();
-            else callAjaxHome();
+                navigator.notification.alert(
+                                               'No internet connection found. Please enable internet and Continiue.',  // message
+                                               function(button){
+                                               onInternetConfirm(button, 'ajaxHome', "", "", "", "", "");
+                                               },              // callback to invoke with index of button pressed
+                                               'Internet Connection Problem',              // title
+                                               'Try Again'            // buttonLabels
+                                               );
+                
+                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
+                //callAjaxHome();
+            //else callAjaxHome();
             $("#preloader").addClass("hide");
         }
     });
+}
+
+function onInternetConfirm(button, type, tip, myLong, myLat, date, lang) {
+    
+        if(type == "ajaxHome")
+        {
+            callAjaxHome();
+        }
+        else if(type=="ajaxFavourites")
+        {
+            callAjaxFavourites();
+        }
+        else if(type == "ajaxFull")
+        {
+            callFullAjax(tip, myLong, myLat, date, lang);
+        }
+        else if(type == "ajaxShort")
+        {
+            callShortAjax(tip, date, lang);
+        }
+        else
+        {
+            callAjaxHome();
+        }
+   
 }
 
 function callAjaxFavourites() {
@@ -283,15 +332,25 @@ function callAjaxFavourites() {
         },
         error: function (error) {
             //console.log(error);
-            if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                callAjaxFavourites();
-            else callAjaxFavourites();
+            
+                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
+                //callAjaxFavourites();
+            //else callAjaxFavourites();
+                
+                navigator.notification.alert(
+                                               'No internet connection found. Please enable internet and Continiue.',  // message
+                                               function(button){
+                                               onInternetConfirm(button, 'ajaxFavourites', "", "", "", "", "");
+                                               },              // callback to invoke with index of button pressed
+                                               'Internet Connection Problem',              // title
+                                               'Try Again'            // buttonLabels
+                                               );
         }
     });
 
     $(".cleanFav").click(function () {
         localStorage.removeItem('favs');
-        alert("cleared");
+        navigator.notification.alert("cleared");
     });
 
 }
@@ -338,9 +397,19 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-            if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                callFullAjax(tip, myLong, myLat, date, lang);
-            else callFullAjax(tip, myLong, myLat, date, lang);
+            
+                navigator.notification.alert(
+                                               'No internet connection found. Please enable internet and Continiue.',  // message
+                                               function(button){
+                                               onInternetConfirm(button, 'ajaxFull', tip, myLong, myLat, date, lang);
+                                               },              // callback to invoke with index of button pressed
+                                               'Internet Connection Problem',              // title
+                                               'Try Again'            // buttonLabels
+                                               );
+                
+                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
+                //callFullAjax(tip, myLong, myLat, date, lang);
+            //else callFullAjax(tip, myLong, myLat, date, lang);
         }
     });
 }
@@ -382,9 +451,19 @@ function callShortAjax(tip, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-            if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                callShortAjax(tip, date, lang);
-            else callShortAjax(tip, date, lang);
+                
+                navigator.notification.alert(
+                                               'No internet connection found. Please enable internet and Continiue.',  // message
+                                               function(button){
+                                               onInternetConfirm(button, 'ajaxShort', tip, "", "", date, lang);
+                                               },              // callback to invoke with index of button pressed
+                                               'Internet Connection Problem',              // title
+                                               'Try Again'            // buttonLabels
+                                               );
+                
+            //if (confirm('No internet connection found. Please enable internet and Continiue.'))
+                //callShortAjax(tip, date, lang);
+            //else callShortAjax(tip, date, lang);
         }
     });
     //alertError();
@@ -430,14 +509,14 @@ function getLocationAndData(tip) {
             callFullAjax(tip, myLong, myLat, date, lang);
         },
         function (err) {
-            alert("Can't find you geolocation.");
+            navigator.notification.alert("Can't find you geolocation.");
             callShortAjax(tip, date, lang);
         },
         options
         );
     }
     else {
-        alert("Browser doesn't support geolocation.");
+        navigator.notification.alert("Browser doesn't support geolocation.");
         callShortAjax(tip, date, lang);
     }
 }
