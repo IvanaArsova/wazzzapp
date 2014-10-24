@@ -1,4 +1,4 @@
-﻿//Dictionaries
+//Dictionaries
 var lanDic = { "English": 0, "German": 1 };
 //var b = { "HOME": 0, "FAVOURITES": 1, "SETTINGS":2, "MAIL":3,"TAXI":4,"REFRESH APP":5 };
 
@@ -11,6 +11,14 @@ var myMappings = [
 ["REFRESH APP", "AKTUALISIERE"],
 ["English", "Englisch"],
 ["German", "Deutsch"],
+["Are you sure you want to add this item to favourites?", "Zu Favoriten hinzufügen?"],
+["Already in Favourites", "Ist bereits bei den Favoriten"],
+["Sorry! No Local Storage support", "Sorry! Lokale Speicherung wird nicht unterstützt"],
+["No internet connection found. Please enable internet and Continiue.", "Keine InternetVerbindung - Verbindung herstellen und fortfahren."],
+["Favourites cleared", "Favoriten löschen"],
+["Can't find you geolocation.", "Kann Geolocation nicht finden."],
+["Browser doesn't support geolocation.", "Browser unterstützt keine Geolocation."],
+["Are you sure you want to remove this item from favourites?", "Wirklich löschen?"]
 ];
 
 
@@ -21,7 +29,7 @@ function LoadScripts() {
     localStorage.date = now.getDate() + "/" + (now.getMonth() + 1).toString() + "/" + now.getFullYear();
     localStorage.favs = localStorage.favs == null ? "" : localStorage.favs;
     //localStorage.favs = "";
-    //f(localStorage.favs);
+    //alert(localStorage.favs);
     //localStorage.lang = localStorage.favs == null ? localStorage.favs : "";
 
     $(".link").on("vclick", function () {
@@ -109,44 +117,29 @@ function AttachShowMoreHandlers() {
 
 function AttachAddToFavouritesHandlers() {
     $(".addToFavourites").on("vclick", function () {
-                             var favID = $(this).attr("id").split('_')[0];
-                             navigator.notification.confirm(
-                                                            'Are you sure you want to add this item to favourites?',  // message
-                                                            function(button){
-                                                                onConfirm(button, favID);
-                                                            },              // callback to invoke with index of button pressed
-                                                            'Favourites Notification',            // title
-                                                            'OK ,Cancel'          // buttonLabels
-                                                            );
+        if (confirm(Translate(8))) {
+            if (typeof (Storage) !== "undefined") {
+                var favID = $(this).attr("id").split('_')[0];
+                if (!checkIfInLocalStorage(favID)) {
+                    var items = localStorage.favs;
+                    items = items + favID + ';';
+                    localStorage.favs = items;
+                    //alert("Added to Favourites");
+                }
+                else {
+                    alert(Translate(9));
+                }
+            }
+            else {
+                alert(Translate(10));
+            }
+        }
     });
-}
-
-function onConfirm(button, favID) {
- if(button != 2)
- {
-    
-    if (typeof (Storage) !== "undefined") {
-        //var favID = $(this).attr("id").split('_')[0];
-        if (!checkIfInLocalStorage(favID)) {
-            var items = localStorage.favs;
-            items = items + favID + ';';
-            localStorage.favs = items;
-            //alert("Added to Favourites");
-        }
-        else {
-            navigator.notification.alert("Already in Favourites");
-           //navigator.notification.alert("Already in Favourites", alertCallback, "Favourites Info", "Done");
-        }
-    }
-    else {
-        navigator.notification.alert("Sorry! No Local Storage support..");
-    }
- }
 }
 
 function AttachRemoveFromFavouritesHandlers() {
     $(".removeFromFavourites").on("vclick", function () {
-        if (confirm("Are you sure you want to remove this item to favourites")) {
+        if (confirm(Translate(15))) {
             if (typeof (Storage) !== "undefined") {
                 var favID = $(this).attr("id").split('_')[0];
 
@@ -156,7 +149,7 @@ function AttachRemoveFromFavouritesHandlers() {
                 $("#" + favID + "_" + $(this).attr("id").split('_')[1]).addClass("hide");
             }
             else {
-                navigator.notification.alert("Sorry! No Local Storage support..");
+                alert(Translate(10));
             }
         }
     });
@@ -164,16 +157,10 @@ function AttachRemoveFromFavouritesHandlers() {
 
 function Translate(text) {
     var lan = localStorage.lang;
-
-
-
     var lanID = lanDic[lan];
     //var baseNameID = b[text];
-
-
     return myMappings[text][lanID];
 }
-
 
 function translateApplication() {
     $(".translate").each(function () {
@@ -222,7 +209,7 @@ function getFirstImage() {
 
 
     var image = "images/startImage/" + lang + "_" + getOrientation(aspect) + "_" + getAspect(pixelRatio) + ".png";
-    navigator.notification.alert(image);
+    alert(image);
     return image;
 
 }
@@ -248,7 +235,7 @@ function callAjaxHome() {
         url: "http://wazzzapp.net/Mobile/GetHome",
         type: "GET",
         dataType: "json",
-        data: { date: localStorage.date, lang: localStorage.lang },
+        data: { date: localStorage.date, lang: localStorage.lang, platform: "ios" },
         withCredentials: false,
         success: function (data, status) {
             $("#HomeContainer").html(data["content"]);
@@ -263,46 +250,12 @@ function callAjaxHome() {
         error: function (error) {
             //console.log('error');
             //console.log(error);
-                navigator.notification.alert(
-                                               'No internet connection found. Please enable internet and Continiue.',  // message
-                                               function(button){
-                                               onInternetConfirm(button, 'ajaxHome', "", "", "", "", "");
-                                               },              // callback to invoke with index of button pressed
-                                               'Internet Connection Problem',              // title
-                                               'Try Again'            // buttonLabels
-                                               );
-                
-                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                //callAjaxHome();
-            //else callAjaxHome();
+            if (confirm(Translate(11)))
+                callAjaxHome();
+            else callAjaxHome();
             $("#preloader").addClass("hide");
         }
     });
-}
-
-function onInternetConfirm(button, type, tip, myLong, myLat, date, lang) {
-    
-        if(type == "ajaxHome")
-        {
-            callAjaxHome();
-        }
-        else if(type=="ajaxFavourites")
-        {
-            callAjaxFavourites();
-        }
-        else if(type == "ajaxFull")
-        {
-            callFullAjax(tip, myLong, myLat, date, lang);
-        }
-        else if(type == "ajaxShort")
-        {
-            callShortAjax(tip, date, lang);
-        }
-        else
-        {
-            callAjaxHome();
-        }
-   
 }
 
 function callAjaxFavourites() {
@@ -313,44 +266,92 @@ function callAjaxFavourites() {
     if (favs != "")
         favs = favs.slice(0, -1);
 
-    jQuery.ajax({
-        url: "http://www.wazzzapp.net/Mobile/getFavourites",
-        type: "GET",
-        data: { type: "Day", lang: lang, longi: "", lati: "", favs: favs },
-        dataType: "json",
-        withCredentials: true,
-        success: function (data, status) {
-            //$("#wrap-container").removeClass("homePage").addClass("otherPage");
-            $("#FavouritesContainer").html(data["content"]);
-            ApplySnapper();
-            CloseSnapper();
-            AttachRemoveFromFavouritesHandlers();
-            attachClearFavouritesHandler()
-            attachEventHandlers();
-            //SocialSharing();
-            $("#preloader").addClass("hide");
+    if (navigator.geolocation) {
+        var options = { enableHighAccuracy: true, timeout: 5000 }; // also try with false.
+        navigator.geolocation.getCurrentPosition(function onSuccess(position) {
+            var myLat = position.coords.latitude;
+            var myLong = position.coords.longitude;
+            jQuery.ajax({
+                url: "http://www.wazzzapp.net/Mobile/getFavourites",
+                type: "GET",
+                data: { type: "Day", lang: lang, longi: myLong, lati: myLat, favs: favs, platform: "ios" },
+                dataType: "json",
+                withCredentials: true,
+                success: function (data, status) {
+                    $("#FavouritesContainer").html(data["content"]);
+                    ApplySnapper();
+                    CloseSnapper();
+                    AttachRemoveFromFavouritesHandlers();
+                    attachClearFavouritesHandler()
+                    attachEventHandlers();
+                    //SocialSharing();
+                    $("#preloader").addClass("hide");
+                },
+                error: function (error) {
+                    //console.log(error);
+                    if (confirm(Translate(11)))
+                        callAjaxFavourites();
+                    else callAjaxFavourites();
+                }
+            });
         },
-        error: function (error) {
-            //console.log(error);
-            
-                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                //callAjaxFavourites();
-            //else callAjaxFavourites();
-                
-                navigator.notification.alert(
-                                               'No internet connection found. Please enable internet and Continiue.',  // message
-                                               function(button){
-                                               onInternetConfirm(button, 'ajaxFavourites', "", "", "", "", "");
-                                               },              // callback to invoke with index of button pressed
-                                               'Internet Connection Problem',              // title
-                                               'Try Again'            // buttonLabels
-                                               );
-        }
-    });
+        function (err) {
+            alert(Translate(13));
+            jQuery.ajax({
+                url: "http://www.wazzzapp.net/Mobile/getFavourites",
+                type: "GET",
+                data: { type: "Day", lang: lang, longi: "", lati: "", favs: favs, platform: "ios" },
+                dataType: "json",
+                withCredentials: true,
+                success: function (data, status) {
+                    $("#FavouritesContainer").html(data["content"]);
+                    ApplySnapper();
+                    CloseSnapper();
+                    AttachRemoveFromFavouritesHandlers();
+                    attachClearFavouritesHandler()
+                    attachEventHandlers();
+                    $("#preloader").addClass("hide");
+                },
+                error: function (error) {
+                    if (confirm(Translate(11)))
+                        callAjaxFavourites();
+                    else callAjaxFavourites();
+                }
+            });
+        },
+        options
+        );
+    }
+    else {
+        alert(Translate(14));
+        jQuery.ajax({
+            url: "http://www.wazzzapp.net/Mobile/getFavourites",
+            type: "GET",
+            data: { type: "Day", lang: lang, longi: "", lati: "", favs: favs, platform: "ios" },
+            dataType: "json",
+            withCredentials: true,
+            success: function (data, status) {
+                $("#FavouritesContainer").html(data["content"]);
+                ApplySnapper();
+                CloseSnapper();
+                AttachRemoveFromFavouritesHandlers();
+                attachClearFavouritesHandler()
+                attachEventHandlers();
+                $("#preloader").addClass("hide");
+            },
+            error: function (error) {
+                if (confirm(Translate(11)))
+                    callAjaxFavourites();
+                else callAjaxFavourites();
+            }
+        });
+    }
+
+    
 
     $(".cleanFav").click(function () {
         localStorage.removeItem('favs');
-        navigator.notification.alert("cleared");
+        alert(Translate(12));
     });
 
 }
@@ -369,7 +370,7 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
         crossDomain: true,
         //beforeSend : function() {$.mobile.loading('show')},
         //complete : function() {$.mobile.loading('hide')},
-        data: { date: date, type: tip, lang: lang, longi: myLong, lati: myLat },
+        data: { date: date, type: tip, lang: lang, longi: myLong, lati: myLat, platform: "ios" },
         dataType: 'json',
         success: function (data) {
             if (tip == "Day") {
@@ -397,19 +398,9 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-            
-                navigator.notification.alert(
-                                               'No internet connection found. Please enable internet and Continiue.',  // message
-                                               function(button){
-                                               onInternetConfirm(button, 'ajaxFull', tip, myLong, myLat, date, lang);
-                                               },              // callback to invoke with index of button pressed
-                                               'Internet Connection Problem',              // title
-                                               'Try Again'            // buttonLabels
-                                               );
-                
-                //if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                //callFullAjax(tip, myLong, myLat, date, lang);
-            //else callFullAjax(tip, myLong, myLat, date, lang);
+            if (confirm(Translate(11)))
+                callFullAjax(tip, myLong, myLat, date, lang);
+            else callFullAjax(tip, myLong, myLat, date, lang);
         }
     });
 }
@@ -424,7 +415,7 @@ function callShortAjax(tip, date, lang) {
         //beforeSend : function() {$.mobile.loading('show')},
         //complete : function() {$.mobile.loading('hide')},
         //data: { date:date, type : section, lang:lang},
-        data: { date: date, type: tip, lang: lang },
+        data: { date: date, type: tip, lang: lang, platform: "ios" },
         dataType: 'json',
         success: function (data) {
             if (tip == "Day") {
@@ -451,19 +442,9 @@ function callShortAjax(tip, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-                
-                navigator.notification.alert(
-                                               'No internet connection found. Please enable internet and Continiue.',  // message
-                                               function(button){
-                                               onInternetConfirm(button, 'ajaxShort', tip, "", "", date, lang);
-                                               },              // callback to invoke with index of button pressed
-                                               'Internet Connection Problem',              // title
-                                               'Try Again'            // buttonLabels
-                                               );
-                
-            //if (confirm('No internet connection found. Please enable internet and Continiue.'))
-                //callShortAjax(tip, date, lang);
-            //else callShortAjax(tip, date, lang);
+            if (confirm(Translate(11)))
+                callShortAjax(tip, date, lang);
+            else callShortAjax(tip, date, lang);
         }
     });
     //alertError();
@@ -509,14 +490,14 @@ function getLocationAndData(tip) {
             callFullAjax(tip, myLong, myLat, date, lang);
         },
         function (err) {
-            navigator.notification.alert("Can't find you geolocation.");
+            alert(Translate(13));
             callShortAjax(tip, date, lang);
         },
         options
         );
     }
     else {
-        navigator.notification.alert("Browser doesn't support geolocation.");
+        alert(Translate(14));
         callShortAjax(tip, date, lang);
     }
 }
@@ -678,8 +659,6 @@ function attachClearFavouritesHandler() {
         callAjaxFavourites();
     })
 }
-
-
 
 function attachEventHandlers() {
     $('.translateOnGoogle').on('vclick', function () {
