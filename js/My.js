@@ -116,26 +116,51 @@ function AttachShowMoreHandlers() {
 }
 
 function AttachAddToFavouritesHandlers() {
+
     $(".addToFavourites").on("vclick", function () {
-        if (navigator.notification.confirm(Translate(8), function (button) {
-            if (button == "Ok") {
-            if (typeof (Storage) !== "undefined") {
+        if (confirm(Translate(8)))
+        {
+            if (typeof (Storage) !== "undefined") 
+            {
                 var favID = $(this).attr("id").split('_')[0];
-                if (!checkIfInLocalStorage(favID)) {
+                if (!checkIfInLocalStorage(favID)) 
+                {
                     var items = localStorage.favs;
                     items = items + favID + ';';
                     localStorage.favs = items;
-        }
-        else { navigator.notification.alert(Translate(9), function () { }, "WazzApp Frankfurt", "Ok"); }
-        }
-        else {
-                    navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
-        }
-        }
-        }, "WazzApp Frankfurt", "Ok,Cancel")) {
-
+                }
+                else 
+                { 
+                    navigator.notification.alert(Translate(9), function () { }, "WazzApp Frankfurt", "Ok"); 
+                }
+            }
+            else 
+            {
+                navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
+            }
         }
     });
+
+    //$(".addToFavourites").on("vclick", function () {
+    //    if (navigator.notification.confirm(Translate(8), function (button) {
+    //        if (button == "Ok") {
+    //        if (typeof (Storage) !== "undefined") {
+    //            var favID = $(this).attr("id").split('_')[0];
+    //            if (!checkIfInLocalStorage(favID)) {
+    //                var items = localStorage.favs;
+    //                items = items + favID + ';';
+    //                localStorage.favs = items;
+    //    }
+    //    else { navigator.notification.alert(Translate(9), function () { }, "WazzApp Frankfurt", "Ok"); }
+    //    }
+    //    else {
+    //                navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
+    //    }
+    //    }
+    //    }, "WazzApp Frankfurt", "Ok,Cancel")) {
+
+    //    }
+    //});
 }
 
 function AttachRemoveFromFavouritesHandlers() {
