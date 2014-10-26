@@ -118,7 +118,12 @@ function AttachShowMoreHandlers() {
 function AttachAddToFavouritesHandlers() {
 
     $(".addToFavourites").on("vclick", function () {
-        navigator.notification.confirm(Translate(8), addIt, "WazzzApp Frankfurt", "Ok,Cancel");
+        var favID = $(this).attr("id").split('_')[0];
+        navigator.notification.confirm(
+            Translate(8),
+            function (button) { addIt(favID);},
+            "WazzzApp Frankfurt",
+            "Ok,Cancel");
     });
 
     
@@ -144,9 +149,9 @@ function AttachAddToFavouritesHandlers() {
     //});
 }
 
-function addIt() {
+function addIt(id) {
     if (typeof (Storage) !== "undefined") {
-        var favID = $(this).attr("id").split('_')[0];
+        var favID = id;
         if (!checkIfInLocalStorage(favID)) {
             var items = localStorage.favs;
             items = items + favID + ';';
