@@ -61,6 +61,13 @@ function LoadScripts() {
         return false;
     });
     translateApplication();
+
+    $(window).on("orientationchange", function () {
+        //to avoid all other scenarios but the OP's
+        if (window.outerWidth / window.innerWidth >= 1.0) return;
+        location.href = location.href;
+        //or location.reload();
+    });
 }
 
 //Handlers
