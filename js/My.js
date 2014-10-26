@@ -123,9 +123,7 @@ function AttachAddToFavouritesHandlers() {
         navigator.notification.confirm(
             Translate(8),
             function (button) {
-                alert(button);
-                alert(button == "Ok");
-                if (button == "Ok") {
+                if (button == 1) {
                     addIt(favID);
                 }
             },
@@ -192,7 +190,10 @@ function AttachBackButton() {
         else {
             navigator.notification.confirm(
             Translate(16),
-            function (button) { ExitApp(); },
+            function (button) {
+                if (button == 1)
+                    ExitApp();
+            },
             "WazzzApp Frankfurt",
             "Ok,Cancel");
         }
@@ -206,7 +207,7 @@ function ExitApp() {
 function AttachRemoveFromFavouritesHandlers() {
     $(".removeFromFavourites").on("vclick", function () {
         navigator.notification.confirm(Translate(15), function (button) {
-            if (button == "Ok") {
+            if (button == 1) {
                 if (typeof (Storage) !== "undefined") {
                     var favID = $(this).attr("id").split('_')[0];
 
