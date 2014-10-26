@@ -117,7 +117,7 @@ function AttachShowMoreHandlers() {
 
 function AttachAddToFavouritesHandlers() {
     $(".addToFavourites").on("vclick", function () {
-        if (navigator.notification.confirm(Translate(8), function () { }, "WazzApp Frankfurt", "Ok,Cancel")) {
+        if (navigator.notification.confirm(Translate(8), function () {
             if (typeof (Storage) !== "undefined") {
                 var favID = $(this).attr("id").split('_')[0];
                 if (!checkIfInLocalStorage(favID)) {
@@ -125,13 +125,13 @@ function AttachAddToFavouritesHandlers() {
                     items = items + favID + ';';
                     localStorage.favs = items;
                 }
-                else {
-                    navigator.notification.alert(Translate(9), function () { }, "WazzApp Frankfurt", "Ok");
-                }
+                else { navigator.notification.alert(Translate(9), function () { }, "WazzApp Frankfurt", "Ok");}
             }
             else {
-                navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
+                    navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
             }
+        }, "WazzApp Frankfurt", "Ok")) {
+
         }
     });
 }
@@ -346,7 +346,7 @@ function callAjaxFavourites() {
         });
     }
 
-    
+
 
     $(".cleanFav").click(function () {
         localStorage.removeItem('favs');
