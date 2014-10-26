@@ -53,8 +53,13 @@ var app = {
         document.addEventListener("online", app.onOnline, false);
         document.addEventListener("resume", app.onResume, false);
 
-        //var pushNotification = window.plugins.pushNotification;
-        //pushNotification.register(app.successHandler, app.errorHandler, { "senderID": "744083827880", "ecb": "app.onNotificationGCM" });
+        var pushNotification = window.plugins.pushNotification;
+        if (device.platform == 'android' || device.platform == 'Android') {
+            pushNotification.register(app.successHandler, app.errorHandler, { "senderID": "744083827880", "ecb": "app.onNotificationGCM" });
+        }
+        else {
+
+        }
 
     },
 

@@ -18,7 +18,8 @@ var myMappings = [
 ["Favourites cleared", "Favoriten löschen"],
 ["Can't find you geolocation.", "Kann Geolocation nicht finden."],
 ["Browser doesn't support geolocation.", "Browser unterstützt keine Geolocation."],
-["Are you sure you want to remove this item from favourites?", "Wirklich löschen?"]
+["Are you sure you want to remove this item from favourites?", "Wirklich löschen?"],
+["Are you sure you want to exit the app?"], ["App verlassen?"]
 ];
 
 
@@ -121,7 +122,10 @@ function AttachAddToFavouritesHandlers() {
         var favID = $(this).attr("id").split('_')[0];
         navigator.notification.confirm(
             Translate(8),
-            function (button) { addIt(favID);},
+            function (button) {
+                if ( button == "Ok")
+                    addIt(favID);
+            },
             "WazzzApp Frankfurt",
             "Ok,Cancel");
     });
@@ -166,21 +170,55 @@ function addIt(id) {
     }
 }
 
-function AttachRemoveFromFavouritesHandlers() {
-    $(".removeFromFavourites").on("vclick", function () {
-        if (confirm(Translate(15))) {
-            if (typeof (Storage) !== "undefined") {
-                var favID = $(this).attr("id").split('_')[0];
-
-                var items = ";" + localStorage.favs;
-                items = items.replace(";" + favID + ";", ";");
-                localStorage.favs = items.substring(1, items.length);
-                $("#" + favID + "_" + $(this).attr("id").split('_')[1]).addClass("hide");
+function AttachBackButton() {
+    $(".back-button").on("vclick", function () {
+        if (localStorage.page != "home") {
+            var counter = 0;
+            $('.colapseAll').each(function () {
+                if ($(this).hasClass('ui-collapsible-collapsed')) {
+                    counter++;
+                }
+            });
+            if (counter == $(".colapseAll").length) {
+                callAjaxHome();
             }
             else {
-                navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
+                $(".colapseAll").collapsible("option", "collapsed", true);
             }
         }
+        else {
+            navigator.notification.confirm(
+            Translate(16),
+            function (button) { ExitApp(); },
+            "WazzzApp Frankfurt",
+            "Ok,Cancel");
+        }
+    });
+}
+
+function ExitApp() {
+    navigator.app.exitApp();
+}
+
+function AttachRemoveFromFavouritesHandlers() {
+    $(".removeFromFavourites").on("vclick", function () {
+        navigator.notification.confirm(Translate(15), function (button) {
+            if (button == "Ok") {
+                if (typeof (Storage) !== "undefined") {
+                    var favID = $(this).attr("id").split('_')[0];
+
+                    var items = ";" + localStorage.favs;
+                    items = items.replace(";" + favID + ";", ";");
+                    localStorage.favs = items.substring(1, items.length);
+                    $("#" + favID + "_" + $(this).attr("id").split('_')[1]).addClass("hide");
+                }
+                else {
+                    navigator.notification.alert(Translate(10), function () { }, "WazzApp Frankfurt", "Ok");
+                }
+            }
+        },
+        "WazzzApp Frankfurt",
+        "Ok,Cancel");
     });
 }
 
@@ -236,9 +274,8 @@ function getFirstImage() {
 
     localStorage.aspect = aspect;
 
-
     var image = "images/startImage/" + lang + "_" + getOrientation(aspect) + "_" + getAspect(pixelRatio) + ".png";
-    alert(image);
+    //alert(image);
     return image;
 
 }
@@ -279,10 +316,13 @@ function callAjaxHome() {
         error: function (error) {
             //console.log('error');
             //console.log(error);
-            if (confirm(Translate(11)))
+
+            navigator.notification.confirm(Translate(11), function (button) {
                 callAjaxHome();
-            else callAjaxHome();
-            $("#preloader").addClass("hide");
+                $("#preloader").addClass("hide");
+            },
+        "WazzzApp Frankfurt",
+        "Ok,Cancel");
         }
     });
 }
@@ -318,14 +358,16 @@ function callAjaxFavourites() {
                 },
                 error: function (error) {
                     //console.log(error);
-                    if (confirm(Translate(11)))
+                    navigator.notification.confirm(Translate(11), function (button) {
                         callAjaxFavourites();
-                    else callAjaxFavourites();
+                    },
+                        "WazzzApp Frankfurt",
+                        "Ok,Cancel");
                 }
             });
         },
         function (err) {
-            alert(Translate(13));
+            navigator.notification.alert(Translate(13), function () { }, "WazzzApp Frankfurt", "Ok");
             jQuery.ajax({
                 url: "http://www.wazzzapp.net/Mobile/getFavourites",
                 type: "GET",
@@ -339,12 +381,15 @@ function callAjaxFavourites() {
                     AttachRemoveFromFavouritesHandlers();
                     attachClearFavouritesHandler()
                     attachEventHandlers();
+                    AttachBackButton();
                     $("#preloader").addClass("hide");
                 },
                 error: function (error) {
-                    if (confirm(Translate(11)))
+                    navigator.notification.confirm(Translate(11), function (button) {
                         callAjaxFavourites();
-                    else callAjaxFavourites();
+                    },
+                        "WazzzApp Frankfurt",
+                        "Ok,Cancel");
                 }
             });
         },
@@ -352,7 +397,7 @@ function callAjaxFavourites() {
         );
     }
     else {
-        alert(Translate(14));
+        navigator.notification.alert(Translate(14), function () { }, "WazzzApp Frankfurt", "Ok");
         jQuery.ajax({
             url: "http://www.wazzzapp.net/Mobile/getFavourites",
             type: "GET",
@@ -366,12 +411,15 @@ function callAjaxFavourites() {
                 AttachRemoveFromFavouritesHandlers();
                 attachClearFavouritesHandler()
                 attachEventHandlers();
+                AttachBackButton();
                 $("#preloader").addClass("hide");
             },
             error: function (error) {
-                if (confirm(Translate(11)))
+                navigator.notification.confirm(Translate(11), function (button) {
                     callAjaxFavourites();
-                else callAjaxFavourites();
+                },
+                        "WazzzApp Frankfurt",
+                        "Ok,Cancel");
             }
         });
     }
@@ -380,7 +428,7 @@ function callAjaxFavourites() {
 
     $(".cleanFav").click(function () {
         localStorage.removeItem('favs');
-        alert(Translate(12));
+        navigator.notification.alert(Translate(12), function () { }, "WazzzApp Frankfurt", "Ok");
     });
 
 }
@@ -418,6 +466,7 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
             CloseSnapper();
             AttachShowMoreHandlers();
             attachEventHandlers();
+            AttachBackButton();
             AttachAddToFavouritesHandlers();
 
             //SocialSharing();
@@ -427,9 +476,9 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-            if (confirm(Translate(11)))
+            navigator.notification.alert(Translate(14), function (button) { 
                 callFullAjax(tip, myLong, myLat, date, lang);
-            else callFullAjax(tip, myLong, myLat, date, lang);
+            }, "WazzzApp Frankfurt", "Ok");
         }
     });
 }
@@ -464,6 +513,7 @@ function callShortAjax(tip, date, lang) {
             AttachShowMoreHandlers();
             AttachAddToFavouritesHandlers();
             attachEventHandlers();
+            AttachBackButton();
             //SocialSharing();
             $("#preloader").addClass("hide");
 
@@ -471,9 +521,10 @@ function callShortAjax(tip, date, lang) {
         error: function () {
             //console.log('error');
             //console.log(error);
-            if (confirm(Translate(11)))
+
+            navigator.notification.alert(Translate(11), function (button) {
                 callShortAjax(tip, date, lang);
-            else callShortAjax(tip, date, lang);
+            }, "WazzzApp Frankfurt", "Ok");
         }
     });
     //alertError();
@@ -519,14 +570,14 @@ function getLocationAndData(tip) {
             callFullAjax(tip, myLong, myLat, date, lang);
         },
         function (err) {
-            alert(Translate(13));
+            navigator.notification.alert(Translate(13), function () { }, "WazzzApp Frankfurt", "Ok");
             callShortAjax(tip, date, lang);
         },
         options
         );
     }
     else {
-        alert(Translate(14));
+        navigator.notification.alert(Translate(14), function () { }, "WazzzApp Frankfurt", "Ok");
         callShortAjax(tip, date, lang);
     }
 }

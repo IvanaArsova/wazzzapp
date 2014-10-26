@@ -1,28 +1,22 @@
 html { height: 100%; min-height: 100%; }
-body { font-family: 'Open Sans Condensed', Arial, sans-serif; position:relative; height:100% !important; min-height:100%;}
+body { font-family: 'Open Sans Condensed', Arial, sans-serif; position: relative; height: 100% !important; min-height: 100%; }
 
-@font-face {
-  font-family: 'Fjalla One';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/FjallaOne-Regular.ttf') format('opentype');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
+@font-face { font-family: 'Fjalla One'; font-style: normal; font-weight: 400; src: url('../fonts/FjallaOne-Regular.ttf') format('opentype'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
 
 .p0 { padding: 0px !important; }
 .m0 { margin: 0px !important; }
 .pt20 { padding-top: 20px; }
 .hide { visibility: hidden !important; width: 0px !important; height: 0px !important; padding: 0px !important; margin: 0px !important; }
-.w100 { width: 100% !important; position:relative; }
+.w100 { width: 100% !important; position: relative; }
 
 a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 /*.homePage { position: fixed; width: 100%; height: 100%; min-height: 100% !important; }
 .otherPage { width: 100%; height: 100%; min-height: 100% !important; }*/
-.page-content { min-height: 100% !important; height:100%; min-height: 100vh; z-index: 9999; }
+.page-content { min-height: 100% !important; height: 100%; min-height: 100vh; z-index: 9999; }
 .page-header1 { background-color: #b20000 !important; min-height: 10% !important; height: 10%; height: 10vh; min-height: 10vh; padding: 5% 0; padding: 0vh 0; }
 
 /*Home page*/
-.homeHeader { position: relative; color: white; z-index: 9999; width: 85%; left: 15%; font-size: 15px; font-size: 3vh; text-transform: uppercase; height: 100%; text-align: right; margin-top: 1vh !important; margin-bottom: 1vh !important; padding-right: 5%; padding-right: 5vw; line-height: 8vh !important; }
+.homeHeader { position: relative; color: white; z-index: 9999; width: 75%; left: 25%; font-size: 15px; font-size: 3vh; text-transform: uppercase; height: 100%; text-align: right; margin-top: 1vh !important; margin-bottom: 1vh !important; padding-right: 5%; padding-right: 5vw; line-height: 8vh !important; }
 .arrow-right { background-image: url(../images/icons/right_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 .arrow-left { background-image: url(../images/icons/left_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 
@@ -34,7 +28,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .day { background-color: white; color: black !important; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 .night { color: White !important; background-color: #2c3e50; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 .Night { color: White !important; background-color: #2c3e50; }
-.deploy-sidebar { position: absolute; top: 0px; left: 0px; background-image: url(../images/misc/deploy-menu_402x.png); background-size: 18px 12px; background-repeat: no-repeat; background-position: 50% 50% !important; width: 15% !important; height: 100% !important; }
+.deploy-sidebar { position: absolute; top: 0px; left: 0px; background-image: url(../images/misc/deploy-menu_402x.png); background-size: 18px 12px; background-repeat: no-repeat; background-position: 50% 50% !important; width: 15% !important; height: 100% !important; left:10%; }
 .datePick { padding: 0 10px !important; background: none !important; color: white !important; float: left!important; width: 100% !important; text-align: right !important; color: white !important; z-index: 9999 !important; top: 0px !important; width: 75% !important; font-size: 3vw !important; text-transform: uppercase !important; height: 100% !important; line-height: 6.5vh !important; padding: 0 10px !important; }
 .event-title { font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 
@@ -47,14 +41,14 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 #select-choice-0 { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
 #select-choice-0-button span { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
 
-.homeHeader { font-family: 'Fjalla One', sans-serif; font-weight: 400 !important;  }
+.homeHeader { font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 
 .container { min-height: 82%; min-height: 82vh; }
-.fullContainer{ min-height: 82%; min-height: 82vh; height:auto; }
+.fullContainer { min-height: 82%; min-height: 82vh; height: auto; }
 
 .ui-collapsible h3 a { font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 
-.ui-mobile .ui-page { position: relative; height: 100% !important;  }
+.ui-mobile .ui-page { position: relative; height: 100% !important; }
 
 /*ACCORDION*/
 /* root element for accordion. decorated with rounded borders and gradient background image */
@@ -105,8 +99,9 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 
 .test, #favs { min-height: 90% !important; min-height: 90vh !important; }
 
-#DayContainer { overflow-y:scroll; -webkit-overflow-scrolling:touch; height:100%; }
-#NightContainer { overflow-y:scroll; -webkit-overflow-scrolling:touch; height:100%; }
+#DayContainer { overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; }
+#NightContainer { overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; }
+#FavouritesContainer { overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 100%; }
 
 #preloader { width: 100%; height: 100%; /*width:100vh; height:100vw;*/ opacity: 0.9; }
 .preloader { left: 40%; width: 20%; top: 30%; }
@@ -143,17 +138,17 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .addLabel { position: relative; width: 100%; font-size: 10px; color: #111; }
 .img-event-add { background-color: #fffce8; width: 100%; display: block; text-shadow: none; font-size: 11px; text-align: center; font-weight: normal; }
 .menuText { color: #eee; }
-.ui-collapsible-heading-toggle { text-transform:uppercase; }
-.event-title { text-transform:uppercase; }
+.ui-collapsible-heading-toggle { text-transform: uppercase; }
+.event-title { text-transform: uppercase; }
 
-#wrap-container { height: 100%; position:relative; /*overflow-y:scroll;*/ min-height:100%;}
-#HomeContainer{  height:100% ; }
+#wrap-container { height: 100%; position: relative; /*overflow-y:scroll;*/ min-height: 100%; }
+#HomeContainer { height: 100%; }
 
 ::-webkit-scrollbar { display: none !important; }
 
-.event-description { font-style:italic; }
+.event-description { font-style: italic; }
 
-#SettingsContainer {  height:100% ; }
+#SettingsContainer { height: 100%; }
 
 #mainImage { display: block; overflow: hidden; position: absolute; z-index: 9999; width: 100%; height: 100%; top: 0px; left: 0px; }
 /*.mainImage { width: 100%; height: 100%; }*/
@@ -166,57 +161,59 @@ min-height: 100%; height:100%;
         .lang { height: 50% !important; }
     }*/
 
-.ui-collapsible-heading-toggle .ui-btn .ui-icon-plus .ui-btn-icon-left .ui-btn-inherit { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important;  }
+.back-button { position: absolute; top: 0px; left: 0px; background-image: url(../images/icons/back.png); background-size: 12px 18px; background-repeat: no-repeat; background-position: 50% 50% !important; width: 10% !important; height: 100% !important; }
+
+.ui-collapsible-heading-toggle .ui-btn .ui-icon-plus .ui-btn-icon-left .ui-btn-inherit { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
 
 
 @media screen and (-webkit-device-pixel-ratio: 0.75) and (orientation: landscape) {
-    .mainImage-English { background-image: url(../images/startImage/English_landscape_ldpi.png);background-size: 100% 100%; }
-    .mainImage-German { background-image: url(../images/startImage/German_landscape_ldpi.png);background-size: 100% 100%; }
+    .mainImage-English { background-image: url(../images/startImage/English_landscape_ldpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_landscape_ldpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 0.75) and (orientation: portrait) {
-    .mainImage-English { background-image: url(../images/startImage/English_portrait_ldpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_portrait_ldpi.png);background-size: 100% 100%;  }
+    .mainImage-English { background-image: url(../images/startImage/English_portrait_ldpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_portrait_ldpi.png); background-size: 100% 100%; }
 }
 
 
 @media screen and (-webkit-device-pixel-ratio: 1) and (orientation: landscape) {
-    .mainImage-English { background-image: url(../images/startImage/English_landscape_mdpi.png);background-size: 100% 100%; }
-    .mainImage-German { background-image: url(../images/startImage/German_landscape_mdpi.png);background-size: 100% 100%; }
+    .mainImage-English { background-image: url(../images/startImage/English_landscape_mdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_landscape_mdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 1) and (orientation: portrait) {
-    .mainImage-English { background-image: url(../images/startImage/English_portrait_mdpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_portrait_mdpi.png);background-size: 100% 100%;  }
+    .mainImage-English { background-image: url(../images/startImage/English_portrait_mdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_portrait_mdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 1.5) and (orientation: landscape) {
-    .mainImage-English { background-image: url(../images/startImage/English_landscape_hdpi.png);background-size: 100% 100%; }
-    .mainImage-German { background-image: url(../images/startImage/German_landscape_hdpi.png);background-size: 100% 100%; }
+    .mainImage-English { background-image: url(../images/startImage/English_landscape_hdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_landscape_hdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 1.5) and (orientation: portrait) {
-    .mainImage-English { background-image: url(../images/startImage/English_portrait_hdpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_portrait_hdpi.png);background-size: 100% 100%;  }
+    .mainImage-English { background-image: url(../images/startImage/English_portrait_hdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_portrait_hdpi.png); background-size: 100% 100%; }
 }
 
 
 @media screen and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
-    .mainImage-English { background-image: url(../images/startImage/English_landscape_xdpi.png);background-size: 100% 100%; }
-    .mainImage-German { background-image: url(../images/startImage/German_landscape_xdpi.png);background-size: 100% 100%; }
+    .mainImage-English { background-image: url(../images/startImage/English_landscape_xdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_landscape_xdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
-    .mainImage-English { background-image: url(../images/startImage/English_portrait_xdpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_portrait_xdpi.png);background-size: 100% 100%;  }
+    .mainImage-English { background-image: url(../images/startImage/English_portrait_xdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_portrait_xdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
-    .mainImage-English { background-image: url(../images/startImage/English_landscape_xhdpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_landscape_xhdpi.png);background-size: 100% 100%; }
+    .mainImage-English { background-image: url(../images/startImage/English_landscape_xhdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_landscape_xhdpi.png); background-size: 100% 100%; }
 }
 
 @media screen and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
-    .mainImage-English { background-image: url(../images/startImage/English_portrait_xhdpi.png);background-size: 100% 100%;  }
-    .mainImage-German { background-image: url(../images/startImage/German_portrait_xhdpi.png);background-size: 100% 100%;  }
+    .mainImage-English { background-image: url(../images/startImage/English_portrait_xhdpi.png); background-size: 100% 100%; }
+    .mainImage-German { background-image: url(../images/startImage/German_portrait_xhdpi.png); background-size: 100% 100%; }
 }
