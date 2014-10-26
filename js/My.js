@@ -312,6 +312,7 @@ function callAjaxHome() {
             $("#preloader").addClass("hide");
             ApplySnapper();
             CloseSnapper();
+            AttachBackButton();
         },
         error: function (error) {
             //console.log('error');
@@ -353,6 +354,7 @@ function callAjaxFavourites() {
                     AttachRemoveFromFavouritesHandlers();
                     attachClearFavouritesHandler()
                     attachEventHandlers();
+                    AttachBackButton();
                     //SocialSharing();
                     $("#preloader").addClass("hide");
                 },
