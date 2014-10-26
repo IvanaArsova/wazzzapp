@@ -123,8 +123,11 @@ function AttachAddToFavouritesHandlers() {
         navigator.notification.confirm(
             Translate(8),
             function (button) {
-                if ( button == "Ok")
+                alert(button);
+                alert(button == "Ok");
+                if (button == "Ok") {
                     addIt(favID);
+                }
             },
             "WazzzApp Frankfurt",
             "Ok,Cancel");
