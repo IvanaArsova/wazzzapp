@@ -19,7 +19,7 @@ var myMappings = [
 ["Can't find you geolocation.", "Kann Geolocation nicht finden."],
 ["Browser doesn't support geolocation.", "Browser unterstützt keine Geolocation."],
 ["Are you sure you want to remove this item from favourites?", "Wirklich löschen?"],
-["Are you sure you want to exit the app?"], ["App verlassen?"]
+["Are you sure you want to exit the app?", "App verlassen?"]
 ];
 
 
