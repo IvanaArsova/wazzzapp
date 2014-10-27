@@ -204,37 +204,39 @@ function addIt(id) {
 }
 
 function AttachBackButton() {
-    $(".back-button").off("vclick").on("vclick", function () {
-        if (localStorage.page != "home") {
-            var counter = 0;
-            $('.colapseAll').each(function () {
-                if ($(this).hasClass('ui-collapsible-collapsed')) {
-                    counter++;
-                }
-            });
-            if (counter == $(".colapseAll").length) {
-                callAjaxHome();
+    $(".back-button").off("vclick").on("vclick", Back );
+}
+
+function Back() {
+    if (localStorage.page != "home") {
+        var counter = 0;
+        $('.colapseAll').each(function () {
+            if ($(this).hasClass('ui-collapsible-collapsed')) {
+                counter++;
             }
-            else {
-                $(".colapseAll").collapsible("option", "collapsed", true);
-            }
+        });
+        if (counter == $(".colapseAll").length) {
+            callAjaxHome();
         }
-    });
+        else {
+            $(".colapseAll").collapsible("option", "collapsed", true);
+        }
+    }
 }
 function AttachExitButton() {
     navigator.notification.confirm(
                Translate(16),
-               function (button) {
-                   if (button == 1) {
-                       ExitApp();
-                   }
-               },
+               ExitApp,
                "WazzzApp Frankfurt",
                "Ok,Cancel");
 }
 
-function ExitApp() {
-    navigator.app.exitApp();
+function ExitApp(button) {
+    if (button == 1)
+    {
+        navigator.app.exitApp();
+    }
+    
 }
 
 function AttachRemoveFromFavouritesHandlers() {
