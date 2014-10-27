@@ -227,15 +227,12 @@ function Back() {
 function AttachExitButton() {
     $(".exit-button").off("vclick").on("vclick", function (e) {
         e.preventDefault();
-        navigator.notification.confirm(Translate(16), ExitApp, "WazzzApp Frankfurt", "Ok,Cancel");
+        navigator.notification.confirm(Translate(16), function (button) {
+            if (button == 1) {
+                navigator.app.exitApp();
+            }
+        }, "WazzzApp Frankfurt", "Ok,Cancel");
     });
-}
-
-function ExitApp(button) {
-    if (button == 1)
-    {
-        navigator.app.exitApp();
-    }
 }
 
 function AttachRemoveFromFavouritesHandlers() {
