@@ -208,8 +208,8 @@ function AttachBackButton() {
     $(".back-button").off("vclick").on("vclick", Back );
 }
 
-function Back(e) {
-    e.preventDefault();
+function Back() {
+    //e.preventDefault();
     if (localStorage.page != "home") {
         var counter = 0;
         $('.colapseAll').each(function () {
