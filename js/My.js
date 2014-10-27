@@ -70,8 +70,9 @@ function resize() {
     var h = jQuery(window).height();
     var w = jQuery(window).width();
     jQuery("#HomeContainer").css({ "width": w, "height": h });
-    jQuery("#select-choice-0-section-Day-button").css({ "height": "8% !important", "width": "8vh !important" });
-    jQuery("#select-choice-0-section-Day").css({ "height": "8% !important", "width": "8vh !important" });
+    jQuery("#HomeContainer #choose").css({ "height": h*8/100 });
+    jQuery("#select-choice-0-section-Day-button").css({ "height": "8% !important", "height": "8vh !important" });
+    jQuery("#select-choice-0-section-Day").css({ "height": "8% !important", "height": "8vh !important" });
 }
 
 function clearContainers() {
