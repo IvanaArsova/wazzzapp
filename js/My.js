@@ -228,7 +228,7 @@ function AttachExitButton() {
     $(".exit-button").off("vclick").on("vclick", function (e) {
         e.preventDefault();
         navigator.notification.confirm(Translate(16), function (button) {
-            alert(button);
+            alert(button == 1);
             //navigator.notification.alert(button == 1, function () { }, "WazzAppFrankfurt", "Ok");
             if (button == 1) {
                 navigator.app.exitApp();
