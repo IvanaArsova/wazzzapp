@@ -208,7 +208,8 @@ function AttachBackButton() {
     $(".back-button").off("vclick").on("vclick", Back );
 }
 
-function Back() {
+function Back(e) {
+    e.preventDefault();
     if (localStorage.page != "home") {
         var counter = 0;
         $('.colapseAll').each(function () {
@@ -424,7 +425,7 @@ function callAjaxFavourites() {
                     AttachRemoveFromFavouritesHandlers();
                     attachClearFavouritesHandler()
                     attachEventHandlers();
-                    AttachBackButton();
+                    //AttachBackButton();
                     $("#preloader").addClass("hide");
                 },
                 error: function (error) {
@@ -455,7 +456,7 @@ function callAjaxFavourites() {
                 AttachRemoveFromFavouritesHandlers();
                 attachClearFavouritesHandler()
                 attachEventHandlers();
-                AttachBackButton();
+                //AttachBackButton();
                 $("#preloader").addClass("hide");
             },
             error: function (error) {
@@ -511,7 +512,7 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
             CloseSnapper();
             AttachShowMoreHandlers();
             attachEventHandlers();
-            AttachBackButton();
+            //AttachBackButton();
             AttachAddToFavouritesHandlers();
 
             //SocialSharing();
@@ -559,7 +560,7 @@ function callShortAjax(tip, date, lang) {
             AttachShowMoreHandlers();
             AttachAddToFavouritesHandlers();
             attachEventHandlers();
-            AttachBackButton();
+            //AttachBackButton();
             //SocialSharing();
             $("#preloader").addClass("hide");
 
