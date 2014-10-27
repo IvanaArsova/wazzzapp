@@ -219,18 +219,18 @@ function AttachBackButton() {
                 $(".colapseAll").collapsible("option", "collapsed", true);
             }
         }
-        else {
-            navigator.notification.confirm(
-            Translate(16),
-            function (button) {
-                if (button == 1) {
-                    ExitApp();
-                }
-            },
-            "WazzzApp Frankfurt",
-            "Ok,Cancel");
-        }
     });
+}
+function AttachExitButton() {
+    navigator.notification.confirm(
+               Translate(16),
+               function (button) {
+                   if (button == 1) {
+                       ExitApp();
+                   }
+               },
+               "WazzzApp Frankfurt",
+               "Ok,Cancel");
 }
 
 function ExitApp() {
@@ -350,7 +350,7 @@ function callAjaxHome() {
             $("#preloader").addClass("hide");
             ApplySnapper();
             CloseSnapper();
-            AttachBackButton();
+            AttachExitButton();
         },
         error: function (error) {
             //console.log('error');
