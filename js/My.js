@@ -61,6 +61,15 @@ function LoadScripts() {
         return false;
     });
     translateApplication();
+
+    jQuery.event.add(window, "resize", resize);
+}
+
+function resize() {
+    alert("orientation changed");
+    var h = jQuery(window).height();
+    var w = jQuery(window).width();
+    jQuery("#HomeContainer").css({ "width": w, "height": h });
 }
 
 function clearContainers() {
@@ -181,7 +190,6 @@ function addIt(id) {
 function AttachBackButton() {
     $(".back-button").on("vclick", function () {
         if (localStorage.page != "home") {
-            //alert("not home page detected");
             var counter = 0;
             $('.colapseAll').each(function () {
                 if ($(this).hasClass('ui-collapsible-collapsed')) {
@@ -196,7 +204,6 @@ function AttachBackButton() {
             }
         }
         else {
-            //alert("home page detected");
             navigator.notification.confirm(
             Translate(16),
             function (button) {
