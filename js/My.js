@@ -70,6 +70,8 @@ function resize() {
     var h = jQuery(window).height();
     var w = jQuery(window).width();
     jQuery("#HomeContainer").css({ "width": w, "height": h });
+    jQuery("#select-choice-0-section-Day-button").css({ "width": "8%", "width": "8vh" });
+    jQuery("#select-choice-0-section-Day").css({ "width": "8%", "width": "8vh" });
 }
 
 function clearContainers() {
