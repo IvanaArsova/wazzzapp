@@ -71,16 +71,16 @@ function resize() {
     var h = jQuery(window).height();
     var w = jQuery(window).width();
     jQuery("#HomeContainer").css({ "width": w, "height": h });
-    jQuery("#HomeContainer #choose").css({ "height": h * 10 / 100 });
-    jQuery("#select-choice-0-button span").css({ "height": h * 10 / 100 });
-    jQuery("#select-choice-0-section-Day-button").css({ "height": "10% !important", "height": "10vh !important" });
-    jQuery("#select-choice-0-section-Day").css({ "height": "10% !important", "height": "10vh !important" });
+    jQuery("#HomeContainer #choose").css({ "height": h * 8 / 100 });
+    jQuery("#select-choice-0-button span").css({ "height": h * 8 / 100 });
+    jQuery("#select-choice-0-section-Day-button").css({ "height": "8% !important", "height": "10vh !important" });
+    jQuery("#select-choice-0-section-Day").css({ "height": "8% !important", "height": "10vh !important" });
 
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
     jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
 
     jQuery("#DayContainer #choose-section").css({ "height": h * 10 / 100 });
-    jQuery("#select-choice-0-section-Day-button span").css({ "height": h * 10 / 100 });
+    jQuery("#select-choice-0-section-Day-button span").css({ "height": h * 8 / 100 });
 
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
     jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });

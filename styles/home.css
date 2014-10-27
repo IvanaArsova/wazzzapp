@@ -26,9 +26,12 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .lang-white { background-color: white; color: black !important; }
 .lang-black { color: White !important; background-color: black; }
 
-.section { position: relative; height: 41% !important; width: 100%; text-align: center; padding: 25% 0; height: 41vh !important; padding-top: 20vh; padding-bottom: 20vh; font-size: 18px; font-size: 7vw; text-transform: uppercase; }
-.day { background-color: white; color: black !important; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; font-size:20px; }
-.night { color: White !important; background-color: #2c3e50; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; font-size:20px; }
+.section { position: relative; height: 11% !important; width: 100%; text-align: center; height: 10vh !important; font-size: 18px; font-size: 7vw; text-transform: uppercase; }
+.day { background-color: white; padding-top:3%; padding-top:3vh; color: black !important; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; font-size:20px; }
+.night { color: White !important; padding-top:3%; padding-top:3vh; background-color: #2c3e50; font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; font-size:20px; }
+.day-bg { padding-top:15%; padding-bottom:15%; padding-top:15vh; padding-bottom:15vh; height:41vh; background-color: white;}
+.night-bg { padding-top:15%; padding-bottom:15%; padding-top:15vh; padding-bottom:15vh; height:41vh; background-color: #2c3e50;}
+
 .Night { color: White !important; background-color: #2c3e50; }
 .deploy-sidebar { position: absolute; top: 0px; left: 0px; background-image: url(../images/misc/deploy-menu_402x.png); background-size: 18px 12px; background-repeat: no-repeat; background-position: 50% 50% !important; width: 15% !important; height: 100% !important; left:10%; }
 .datePick { padding: 0 10px !important; background: none !important; color: white !important; float: left!important; width: 100% !important; text-align: right !important; color: white !important; z-index: 9999 !important; top: 0px !important; width: 75% !important; font-size: 3vw !important; text-transform: uppercase !important; height: 100% !important; line-height: 6.5vh !important; padding: 0 10px !important; }
@@ -93,7 +96,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .additionalInfoText { font-size: 11px !important; }
 
 .ui-btn-icon-left:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after { background: none; border-radius: 0; background-position: center center; background-repeat: no-repeat; /* -webkit-border-radius: 1em; */ /* border-radius: 1em; */ }
-.ui-btn-icon-right:after { color:white; border-radius: 0; background:none; }
+.ui-btn-icon-right:after { color:white; border-radius: 0; /*background:none;*/ }
 
 .ui-icon-minus:after { background-image: url('../images/ui/1d.png'); background-size: contain; }
 .ui-icon-plus:after { background-image: url('../images/ui/1.png'); background-size: contain; }
