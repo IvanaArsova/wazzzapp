@@ -456,7 +456,7 @@ function callAjaxFavourites() {
                 AttachRemoveFromFavouritesHandlers();
                 attachClearFavouritesHandler()
                 attachEventHandlers();
-                //AttachBackButton();
+                AttachBackButton();
                 $("#preloader").addClass("hide");
             },
             error: function (error) {
@@ -512,7 +512,7 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
             CloseSnapper();
             AttachShowMoreHandlers();
             attachEventHandlers();
-            //AttachBackButton();
+            AttachBackButton();
             AttachAddToFavouritesHandlers();
 
             //SocialSharing();
@@ -560,7 +560,7 @@ function callShortAjax(tip, date, lang) {
             AttachShowMoreHandlers();
             AttachAddToFavouritesHandlers();
             attachEventHandlers();
-            //AttachBackButton();
+            AttachBackButton();
             //SocialSharing();
             $("#preloader").addClass("hide");
 
