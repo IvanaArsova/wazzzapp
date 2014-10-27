@@ -20,7 +20,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .arrow-right { background-image: url(../images/icons/right_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 .arrow-left { background-image: url(../images/icons/left_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 
-.lang { position: relative; height: 50% !important; width: 100%; text-align: center; z-index: 9999; padding: 40% 0; height: 50vh !important; padding-top: 20vh; padding-bottom: 20vh; font-size: 18px; font-size: 6vw; text-transform: uppercase; font-weight: bold; }
+.lang { position: relative; height: 50% !important; width: 100%; text-align: center; z-index: 9999; padding: 40% 0; height: 50vh !important; padding-top: 20vh; padding-bottom: 20vh; font-size: 25px; /*font-size: 6vw;*/ text-transform: uppercase; font-weight: bold; }
 .lang-white { background-color: white; color: black !important; }
 .lang-black { color: White !important; background-color: black; }
 

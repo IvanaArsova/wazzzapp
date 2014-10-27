@@ -75,7 +75,9 @@ function resize() {
     jQuery("#select-choice-0-section-Day-button").css({ "height": "8% !important", "height": "8vh !important" });
     jQuery("#select-choice-0-section-Day").css({ "height": "8% !important", "height": "8vh !important" });
 
-    
+    jQuery("#SettingsContainer").css({ "width": w, "height": h });
+    jQuery("#SettingsContainer .lang").css({ "width": w, "height": h/2 });
+
 }
 
 function clearContainers() {
