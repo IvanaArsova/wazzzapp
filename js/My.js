@@ -350,7 +350,7 @@ function callAjaxHome() {
             $("#preloader").addClass("hide");
             ApplySnapper();
             CloseSnapper();
-            AttachExitButton();
+            //AttachExitButton();
         },
         error: function (error) {
             //console.log('error');
