@@ -1,4 +1,5 @@
 //Dictionaries
+var $ = jQuery.noConflict();
 var lanDic = { "English": 0, "German": 1 };
 //var b = { "HOME": 0, "FAVOURITES": 1, "SETTINGS":2, "MAIL":3,"TAXI":4,"REFRESH APP":5 };
 
@@ -224,16 +225,10 @@ function Back() {
     }
 }
 function AttachExitButton() {
-    e.preventDefault();
-    (".exit-button").off("vclick").on("vclick", AskToExit);
-}
-
-function AskToExit() {
-    navigator.notification.confirm(
-            Translate(16),
-            ExitApp,
-            "WazzzApp Frankfurt",
-            "Ok,Cancel");
+    $(".exit-button").off("vclick").on("vclick", function (e) {
+        e.preventDefault();
+        navigator.notification.confirm(Translate(16), ExitApp, "WazzzApp Frankfurt", "Ok,Cancel");
+    });
 }
 
 function ExitApp(button) {
