@@ -66,7 +66,7 @@ function LoadScripts() {
 }
 
 function resize() {
-    alert("orientation changed");
+    //alert("orientation changed");
     var h = jQuery(window).height();
     var w = jQuery(window).width();
     jQuery("#HomeContainer").css({ "width": w, "height": h });
