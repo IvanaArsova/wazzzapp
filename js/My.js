@@ -204,7 +204,7 @@ function addIt(id) {
 }
 
 function AttachBackButton() {
-    $(".back-button").on("vclick", function () {
+    $(".back-button").off("vclick").on("vclick", function () {
         if (localStorage.page != "home") {
             var counter = 0;
             $('.colapseAll').each(function () {
