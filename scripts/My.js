@@ -44,8 +44,18 @@ function LoadScripts() {
         callAjaxHome();
         return false;
     });
+
+    jQuery.event.add(window, "load", resize);
+    jQuery.event.add(window, "resize", resize);
     
     translateApplication();
+}
+
+function resize() {
+    alert("orientation changed");
+    var h = jQuery(window).height();
+    var w = jQuery(window).width();
+    jQuery("body").css({ "width": w, "height": h });
 }
 
 //Handlers

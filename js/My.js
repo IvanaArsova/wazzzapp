@@ -198,8 +198,9 @@ function AttachBackButton() {
             navigator.notification.confirm(
             Translate(16),
             function (button) {
-                if (button == 1)
+                if (button == 1) {
                     ExitApp();
+                }
             },
             "WazzzApp Frankfurt",
             "Ok,Cancel");
