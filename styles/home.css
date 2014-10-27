@@ -17,6 +17,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 
 /*Home page*/
 .homeHeader { position: relative; color: white; z-index: 9999; width: 75%; left: 25%; font-size: 15px; font-size: 3vh; text-transform: uppercase; height: 100%; text-align: right; margin-top: 1vh !important; margin-bottom: 1vh !important; padding-right: 5%; padding-right: 5vw; line-height: 8vh !important; }
+#HomeContainer .homeHeader { width:85%; left:15% } 
 .arrow-right { background-image: url(../images/icons/right_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 .arrow-left { background-image: url(../images/icons/left_32.png); width: 10%; float: left; height: 100%; right: 0px !important; /* top: 6.5vw; */ background-position: 50%; float: left !important; background-repeat: no-repeat; background-size: 80%; display: none; }
 
