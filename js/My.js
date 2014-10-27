@@ -224,11 +224,16 @@ function Back() {
     }
 }
 function AttachExitButton() {
+    e.preventDefault();
+    (".exit-button").off("vclick").on("vclick", AskToExit);
+}
+
+function AskToExit() {
     navigator.notification.confirm(
-               Translate(16),
-               ExitApp,
-               "WazzzApp Frankfurt",
-               "Ok,Cancel");
+            Translate(16),
+            ExitApp,
+            "WazzzApp Frankfurt",
+            "Ok,Cancel");
 }
 
 function ExitApp(button) {
@@ -236,7 +241,6 @@ function ExitApp(button) {
     {
         navigator.app.exitApp();
     }
-    
 }
 
 function AttachRemoveFromFavouritesHandlers() {
