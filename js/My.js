@@ -73,6 +73,13 @@ function resize() {
     jQuery("body").css({ "width": w, "height": h });
 }
 
+function clearContainers() {
+    $("#DayContainer").html("");
+    $("#NightContainer").html("");;
+    $("#HomeContainer").html("");;
+    $("#FavouritesContainer").html("");
+}
+
 //Handlers
 function showMainImage() {
     $("#preloader").addClass("hide");
@@ -321,6 +328,7 @@ function callAjaxHome() {
         data: { date: localStorage.date, lang: localStorage.lang, platform: "ios" },
         withCredentials: false,
         success: function (data, status) {
+            clearContainers();
             $("#HomeContainer").html(data["content"]);
             AttachHomeHandlers();
             attachSelects();
@@ -335,7 +343,8 @@ function callAjaxHome() {
             //console.log('error');
             //console.log(error);
 
-            navigator.notification.confirm(Translate(11), function (button) {
+            navigator.notification.confirm(Translate(11),
+                function (button) {
                 callAjaxHome();
                 $("#preloader").addClass("hide");
             },
@@ -365,6 +374,7 @@ function callAjaxFavourites() {
                 dataType: "json",
                 withCredentials: true,
                 success: function (data, status) {
+                    clearContainers();
                     $("#FavouritesContainer").html(data["content"]);
                     ApplySnapper();
                     CloseSnapper();
@@ -394,6 +404,7 @@ function callAjaxFavourites() {
                 dataType: "json",
                 withCredentials: true,
                 success: function (data, status) {
+                    clearContainers();
                     $("#FavouritesContainer").html(data["content"]);
                     ApplySnapper();
                     CloseSnapper();
@@ -424,6 +435,7 @@ function callAjaxFavourites() {
             dataType: "json",
             withCredentials: true,
             success: function (data, status) {
+                clearContainers();
                 $("#FavouritesContainer").html(data["content"]);
                 ApplySnapper();
                 CloseSnapper();
@@ -469,6 +481,7 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
         data: { date: date, type: tip, lang: lang, longi: myLong, lati: myLat, platform: "ios" },
         dataType: 'json',
         success: function (data) {
+            clearContainers();
             if (tip == "Day") {
                 $("#DayContainer").html(data["content"]);
                 show("#DayContainer");
@@ -515,6 +528,7 @@ function callShortAjax(tip, date, lang) {
         data: { date: date, type: tip, lang: lang, platform: "ios" },
         dataType: 'json',
         success: function (data) {
+            clearContainers();
             if (tip == "Day") {
                 $("#DayContainer").html(data["content"]);
                 show("#DayContainer");
