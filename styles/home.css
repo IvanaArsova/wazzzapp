@@ -93,7 +93,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .additionalInfoText { font-size: 11px !important; }
 
 .ui-btn-icon-left:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after { background: none; border-radius: 0; background-position: center center; background-repeat: no-repeat; /* -webkit-border-radius: 1em; */ /* border-radius: 1em; */ }
-.ui-btn-icon-right:after { color:white; border-radius: 0; }
+.ui-btn-icon-right:after { color:white; border-radius: 0; background:none; }
 
 .ui-icon-minus:after { background-image: url('../images/ui/1d.png'); background-size: contain; }
 .ui-icon-plus:after { background-image: url('../images/ui/1.png'); background-size: contain; }
