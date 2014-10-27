@@ -84,7 +84,7 @@ function resize() {
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
     jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
 
-    jQuery("#homeHeader").css({ "font-size": h/10 - 4 + "px" })
+    jQuery(".homeHeader").css({ "font-size": h/25 + "px" })
 
 }
 
