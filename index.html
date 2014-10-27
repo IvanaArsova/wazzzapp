@@ -78,10 +78,13 @@
                 <a id="settings-btn" class="nav-item config-nav"><span class="menuText translate" id="2">SETTINGS</span><em class="nav-page"></em></a>
 
                 <p class="sidebar-separator">GET SOCIAL</p>
-                <a href="mailto:contact@wazzzapp.net" class="nav-item contact-nav" rel="external"><span class="menuText translate" id="3">MAIL</span><em class="nav-link"></em></a>
+               <!-- <a  href="mailto:contact@wazzzapp.net" class="nav-item contact-nav" rel="external"><span class="menuText translate" id="3">MAIL</span><em class="nav-link"></em></a>-->
+                <a onclick="window.plugin.email.open({to:['contact@wazzzapp.net'],cc:[],bcc:[], subject: 'WazzzApp Contact',body:''});" class="nav-item contact-nav"><span class="menuText translate" id="3">MAIL</span><em class="nav-link"></em></a>
                 <a href="tel:+4969230001" class="nav-item call-nav" rel="external"><span class="menuText translate" id="4">TAXI</span><em class="nav-link"></em></a>
 
                 <a class="nav-item call-nav refresh"><span class="menuText translate" id="5">REFRESH APP</span><em class="nav-page"></em></a>
+
+                
 
             </div>
         </div>
