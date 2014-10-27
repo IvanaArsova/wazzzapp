@@ -82,8 +82,8 @@ function resize() {
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
     jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
 
-    //jQuery("#DayContainer #choose-section").css({ "height": h * 10 / 100 });
-    //jQuery("#select-choice-0-section-Day-button span").css({ "height": h * 8 / 100 });
+    jQuery("#DayContainer #choose-section").css({ "height": h * 8 / 100 });
+    jQuery("#select-choice-0-section-Day-button span").css({ "height": h * 8 / 100 });
 
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
     jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
@@ -559,7 +559,7 @@ function callShortAjax(tip, date, lang) {
             attachSelectChangeHandler();
             ApplyAccordion(".accordion");
             ApplySnapper();
-            CloseSnapper();
+            //CloseSnapper();
             AttachShowMoreHandlers();
             AttachAddToFavouritesHandlers();
             attachEventHandlers();
