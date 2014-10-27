@@ -76,7 +76,13 @@ function resize() {
     jQuery("#select-choice-0-section-Day").css({ "height": "8% !important", "height": "8vh !important" });
 
     jQuery("#SettingsContainer").css({ "width": w, "height": h });
-    jQuery("#SettingsContainer .lang").css({ "width": w, "height": h/2 });
+    jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
+
+    jQuery("#DayContainer #choose-section").css({ "height": h * 8 / 100 });
+    jQuery("#select-choice-0-section-Day-button span").css({ "height": h * 8 / 100 });
+
+    jQuery("#SettingsContainer").css({ "width": w, "height": h });
+    jQuery("#SettingsContainer .lang").css({ "width": w, "height": h / 2 });
 
 }
 
