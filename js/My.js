@@ -62,12 +62,15 @@ function LoadScripts() {
     });
     translateApplication();
 
-    $(window).on("orientationchange", function () {
-        //to avoid all other scenarios but the OP's
-        if (window.outerWidth / window.innerWidth >= 1.0) return;
-        location.href = location.href;
-        //or location.reload();
-    });
+    jQuery.event.add(window, "load", resize);
+    jQuery.event.add(window, "resize", resize);
+}
+
+function resize() {
+    alert("orientation changed");
+    var h = jQuery(window).height();
+    var w = jQuery(window).width();
+    jQuery("body").css({ "width": w, "height": h });
 }
 
 //Handlers
@@ -181,6 +184,7 @@ function addIt(id) {
 function AttachBackButton() {
     $(".back-button").on("vclick", function () {
         if (localStorage.page != "home") {
+            alert("not home page detected");
             var counter = 0;
             $('.colapseAll').each(function () {
                 if ($(this).hasClass('ui-collapsible-collapsed')) {
@@ -195,6 +199,7 @@ function AttachBackButton() {
             }
         }
         else {
+            alert("home page detected");
             navigator.notification.confirm(
             Translate(16),
             function (button) {
