@@ -34,7 +34,7 @@ a::selection, ::-moz-selection { background: #59574b; color: #fdfcf5; }
 .datePick { padding: 0 10px !important; background: none !important; color: white !important; float: left!important; width: 100% !important; text-align: right !important; color: white !important; z-index: 9999 !important; top: 0px !important; width: 75% !important; font-size: 3vw !important; text-transform: uppercase !important; height: 100% !important; line-height: 6.5vh !important; padding: 0 10px !important; }
 .event-title { font-family: 'Fjalla One', sans-serif; font-weight: 400 !important; }
 
-#select-choice-0-section-Day { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
+#select-choice-0-section-Day { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; min-height:40px; }
 #select-choice-0-section-Day-button span { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
 
 #select-choice-0-section-Night { font-family: 'Fjalla One', sans-serif !important; font-weight: 400 !important; }
