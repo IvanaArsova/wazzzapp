@@ -222,9 +222,10 @@ function Back() {
             }
         });
         if (counter == $(".colapseAll").length) {
+            $("#preloader").removeClass("hide");
             setTimeout(function () {
                 callAjaxHome();
-            }, 200);
+            }, 100);
         }
         else {
             $(".colapseAll").collapsible("option", "collapsed", true);
