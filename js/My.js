@@ -222,25 +222,15 @@ function Back() {
             }
         });
         if (counter == $(".colapseAll").length) {
-            callAjaxHome();
+            setTimeout(function () {
+                callAjaxHome();
+            }, 200);
         }
         else {
             $(".colapseAll").collapsible("option", "collapsed", true);
         }
     }
 }
-//function AttachExitButton() {
-//    $(".exit-button").off("vclick").on("vclick", function (e) {
-//        e.preventDefault();
-//        navigator.notification.confirm(Translate(16), function (button) {
-//            alert(button == 1);
-//            //navigator.notification.alert(button == 1, function () { }, "WazzAppFrankfurt", "Ok");
-//            if (button == 1) {
-//                navigator.app.exitApp();
-//            }
-//        }, "WazzzApp Frankfurt", "Ok,Cancel");
-//    });
-//}
 
 function AttachRemoveFromFavouritesHandlers() {
     $(".removeFromFavourites").on("vclick", function () {
