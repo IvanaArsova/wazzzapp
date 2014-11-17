@@ -19,6 +19,7 @@ var app = {
     onDeviceReady: function () {
 
         app.receivedEvent('deviceready');
+        watchPosition();
     },
 
 
@@ -188,3 +189,29 @@ var app = {
         // Handle resume event
     }
 };
+
+function watchPosition() {
+    if (navigator.geolocation) {
+        var options = { enableHighAccuracy: true, timeout: 5000 }; // also try with false.
+        navigator.geolocation.getCurrentPosition(function onSuccess(position) {
+            var myLat = position.coords.latitude;
+            var myLong = position.coords.longitude;
+            localStorage.myLat = myLat;
+            localStorage.myLong = myLong;
+            localStorage.gps = "enabled";
+            //alert("success," + myLat + "," + myLong);
+            //callFullAjax(tip, myLong, myLat, date, lang);
+            //watchPosition();
+        },
+        function (err) {
+            //navigator.notification.alert(Translate(13), function () { }, "WazzzApp Frankfurt", "Ok");
+            //callShortAjax(tip, date, lang);
+            localStorage.gps = "disabled";
+            //watchPosition();
+        },
+        options
+        );
+
+        setTimeout(watchPosition, 20000);
+    }
+}
