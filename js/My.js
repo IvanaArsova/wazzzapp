@@ -227,7 +227,7 @@ function Back() {
             $("#preloader").removeClass("hide");
             setTimeout(function () {
                 callAjaxHome();
-            }, 100);
+            }, 300);
         }
         else {
             $(".colapseAll").collapsible("option", "collapsed", true);
