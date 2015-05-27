@@ -320,9 +320,53 @@ function callHome() {
         $("#preloader").addClass("hide");
     }
     else {
-        showMainImage();
+        showAd();
+        //showMainImage();
         //callAjaxHome();
     }
+}
+
+function showAd() {
+    jQuery.ajax({
+        url: "http://wazzzapp.net/Mobile/GetAdd",
+        type: "GET",
+        dataType: "json",
+        data: { lang: localStorage.lang, platform: "ios" },
+        withCredentials: false,
+        success: function (data, status) {
+            if (data["hasAdd"] == "yes") {
+                $("#AddContainer").html(data["content"]);
+                show("#AddContainer");
+                $("#preloader").addClass("hide");
+                ApplySnapper();
+                CloseSnapper();
+                tout = setTimeout(function () {
+                    showMainImage();
+                }, 8000);
+            }
+            else {
+                showMainImage();
+            }
+        },
+        error: function (error) {
+            navigator.notification.confirm(Translate(11), function (button) {
+                if (button == 1) {
+                    callAjaxHome();
+                }
+                else {
+                    $("#preloader").addClass("hide");
+                }
+            },
+       "WazzzApp Frankfurt",
+       Translate(17) + "," + Translate(18));
+        }
+    });
+}
+
+function skipAdd() {
+    //callAjaxHome();
+    clearTimeout(tout);
+    showMainImage();
 }
 
 function callAjaxHome() {
