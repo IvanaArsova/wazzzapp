@@ -1,4 +1,20 @@
 
+function initPushwoosh() {
+    var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
+    //if (device.platform == "Android") {
+    //    registerPushwooshAndroid();
+    //}
+
+    if (device.platform == "iPhone" || device.platform == "iOS") {
+        registerPushwooshIOS();
+    }
+
+    //if (device.platform == "Win32NT") {
+    //    registerPushwooshWP();
+    //}
+}
+
+
 var app = {
     // Application Constructor
     initialize: function () {
@@ -17,7 +33,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-
+        initPushwoosh();
         app.receivedEvent('deviceready');
     },
 
@@ -25,26 +41,11 @@ var app = {
 
     // Update DOM on a Received Event
     receivedEvent: function (id) {
-
-        //var parentElement = document.getElementById(id);
-        //var listeningElement = parentElement.querySelector('.listening');
-        //var receivedElement = parentElement.querySelector('.received');
-
-        //listeningElement.setAttribute('style', 'display:none;');
-        //receivedElement.setAttribute('style', 'display:block;');
-        
-
         console.log('Received Event: ' + id);
 
         LoadScripts();
 
         callHome();
-        //navigator.splashscreen.hide();
-        //setTimeout(function () {
-        //    navigator.splashscreen.hide();
-        //}, 2000);
-        //$(".mainImage").attr("src", getFirstImage());
-
         document.addEventListener("pause", app.onPause, false);
         document.addEventListener("backbutton", app.onBackKeyDown, false);
         document.addEventListener("menubutton", app.onMenuKeyDown, false);
@@ -53,15 +54,17 @@ var app = {
         document.addEventListener("online", app.onOnline, false);
         document.addEventListener("resume", app.onResume, false);
 
-        var pushNotification = window.plugins.pushNotification;
-        if (device.platform == 'android' || device.platform == 'Android') {
-            pushNotification.register(app.successHandler, app.errorHandler, { "senderID": "744083827880", "ecb": "app.onNotificationGCM" });
-        }
-        else {
-
-        }
+        //var pushNotification = window.plugins.pushNotification;
+        //pushNotification.register(tokenHandler, errorHandler, { "badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN" });
 
     },
+
+    //tokenHandler: function (result) {
+    //    //$("#app-status-ul").append('<li>token: '+ result +'</li>');
+    //    // Your iOS push server needs to know the token before it can push to this device
+    //    // here is where you might want to send it the token for later use.
+
+    //},
 
     successHandler: function (result) {
         //alert('Callback Success! Result = ' + result)
@@ -71,55 +74,21 @@ var app = {
         //alert(error);
     },
 
-    onNotificationGCM: function (e) {
-        switch (e.event) {
-            case 'registered':
-                if (localStorage.registerID == null) {
-                    if (e.regid.length > 0) {
-                        console.log("Regid " + e.regid);
-
-                        localStorage.registerID = e.regid;
-
-                        $("#preloader").addClass("hide");
-                        jQuery.ajax({
-                            url: "http://wazzzapp.net/Mobile/RegisterDevice",
-                            type: "POST",
-                            dataType: "json",
-                            data: { registerID: localStorage.registerID },
-                            withCredentials: false,
-                            success: function (data, status) {
-
-                                $("#preloader").addClass("hide");
-                            },
-                            error: function (error) {
-                            }
-                        });
-
-                        //alert('registration id = ' + e.regid);
-                        var elem = document.getElementById("regID");
-                        elem.value = e.regid;
-                    }
-                }
-                break;
-
-            case 'message':
-                // this is the actual push notification. its format depends on the data model from the push server
-                alert(e.message);
-                //$(".openDialog").trigger("click").trigger("click");
-                break;
-
-
-            case 'error':
-                alert('GCM error = ' + e.msg);
-                break;
-
-            default:
-                alert('An unknown GCM event has occurred');
-                break;
-        }
-    },
-
-
+    //onNotificationAPN: function (e) {
+    //    if (e.alert) {
+    //        //$("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+    //        // showing an alert also requires the org.apache.cordova.dialogs plugin
+    //        navigator.notification.alert(e.alert);
+    //    }
+    //    if (e.sound) {
+    //        // playing a sound also requires the org.apache.cordova.media plugin
+    //        var snd = new Media(e.sound);
+    //        snd.play();
+    //    }
+    //    if (e.badge) {
+    //        pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+    //    }
+    //},
 
     onResume: function () {
         //navigator.splashscreen.hide();
@@ -158,10 +127,7 @@ var app = {
     },
 
     onMenuKeyDown: function () {
-        //alert("menu button clicked");
-        //navigator.app.backHistory();
         // Handle menu button
-        //ApplySnapper();
         OpenSnapper();
     },
 
@@ -170,21 +136,14 @@ var app = {
     },
 
     onOffline: function () {
-        //if (confirm('Your internet connection is down. Please connect your device to the internet.')) {
-
-        //}
         //Handle offline event
     },
 
     onOnline: function () {
-        //callAjaxHome();
         // Handle the online event
     },
 
     onResume: function () {
-        //navigator.splashscreen.show();
-        //callAjaxHome();
-        //navigator.splashscreen.hide();
         // Handle resume event
     }
 };

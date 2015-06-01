@@ -22,8 +22,6 @@
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <link href="styles/framework-style.css" rel="stylesheet" type="text/css">
     <link href="styles/framework.css" rel="stylesheet" type="text/css">
-    <!--<link href="styles/bxslider.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="styles/swipebox.css" rel="stylesheet" type="text/css">-->
     <link href="styles/icons.css" rel="stylesheet" type="text/css">
     <link href="styles/retina.css" rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" />
     <link href="styles/font-awesome.css" rel="stylesheet" />
@@ -36,19 +34,8 @@
     <script src="scripts/snap.js" type="text/javascript"></script>
     <script src="scripts/hammer.js" type="text/javascript"></script>
 
-    <!--<script src="scripts/subscribe.js" type="text/javascript"></script>-->
-    <!--<script src="scripts/contact.js" type="text/javascript"></script>-->
-    <!--<script src="scripts/jquery.swipebox.js" type="text/javascript"></script>-->
-    <!--<script src="scripts/bxslider.js" type="text/javascript"></script>-->
-    <!--    <script src="scripts/colorbox.js" type="text/javascript"></script>
-    <script src="scripts/retina.js" type="text/javascript"></script>-->
-    <!--<script src="scripts/custom.js" type="text/javascript"></script>-->
-    <!--<script src="scripts/framework.js" type="text/javascript"></script>-->
-
-
-
-
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/My.js"></script>
     <script type="text/javascript">
@@ -58,13 +45,6 @@
 
 </head>
 <body style="width:100%; height:100%; position:relative;">
-    <!--<div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
-    </div>-->
     <div id="wrap-container" class="all-elements homePage">
         <div id="sidebar" class="page-sidebar">
             <div class="page-sidebar-scroll">
@@ -78,14 +58,10 @@
                 <a id="settings-btn" class="nav-item config-nav"><span class="menuText translate" id="2">SETTINGS</span><em class="nav-page"></em></a>
 
                 <p class="sidebar-separator">GET SOCIAL</p>
-               <!-- <a  href="mailto:contact@wazzzapp.net" class="nav-item contact-nav" rel="external"><span class="menuText translate" id="3">MAIL</span><em class="nav-link"></em></a>-->
                 <a onclick="window.plugin.email.open({to:['contact@wazzzapp.net'],cc:[],bcc:[], subject: 'WazzzApp Contact',body:''});" class="nav-item contact-nav"><span class="menuText translate" id="3">MAIL</span><em class="nav-link"></em></a>
                 <a href="tel:+4969230001" class="nav-item call-nav" rel="external"><span class="menuText translate" id="4">TAXI</span><em class="nav-link"></em></a>
 
                 <a class="nav-item call-nav refresh"><span class="menuText translate" id="5">REFRESH APP</span><em class="nav-page"></em></a>
-
-                
-
             </div>
         </div>
         <div id="content" class="page-content ">
@@ -99,25 +75,6 @@
             </div>
             <div id="FavouritesContainer" class="container m0 p0 hide"></div>
             <div id="AddContainer" class="container m0 p0 hide"></div>
-
-            <!--<div style="position:absolute; width:100%; height:100%">
-            <div data-role="dialog" id="page1">
-                
-                <div role="main" class="ui-content">
-                    <a href="#dialogPage" data-rel="dialog" class="openDialog">Open dialog</a>
-                </div>
-            </div>
-
-            <div data-role="dialog" id="dialogPage">
-                <div data-role="header">
-                    <h2>Dialog</h2>
-                </div>
-                <div role="main" class="ui-content">
-                    <p>I am a dialog</p>
-                </div>
-            </div>
-
-                </div>-->
         </div>
     </div>
 
@@ -126,15 +83,7 @@
     </div>
 
     <div id="mainImage">
-        <!--<img class="mainImage" src="images/background/mai1n.png" />-->
+        
     </div>
-   <!-- <script>
-        $(document).ready(function () {
-            $(".dialog").dialog({ closeBtnText: "OK" });
-        });
-    </script>-->
-
-
-
 </body>
 </html>
