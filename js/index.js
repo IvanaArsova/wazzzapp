@@ -1,19 +1,37 @@
 
 function initPushwoosh() {
     var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
-    //if (device.platform == "Android") {
-    //    registerPushwooshAndroid();
-    //}
 
-    if (device.platform == "iPhone" || device.platform == "iOS") {
-        registerPushwooshIOS();
-    }
+    //set push notification callback before we initialize the plugin
+    document.addEventListener('push-notification', function (event) {
+        //get the notification payload
+        var notification = event.notification;
 
-    //if (device.platform == "Win32NT") {
-    //    registerPushwooshWP();
-    //}
+        //display alert to the user for example
+        alert(notification.aps.alert);
+
+        //clear the app badge
+        pushNotification.setApplicationIconBadgeNumber(0);
+    });
+
+    //initialize the plugin
+    pushNotification.onDeviceReady({ pw_appid: "PUSHWOOSH_APP_ID" });
+
+    //register for pushes
+    pushNotification.registerDevice(
+        function (status) {
+            var deviceToken = status['deviceToken'];
+            console.warn('registerDevice: ' + deviceToken);
+        },
+        function (status) {
+            console.warn('failed to register : ' + JSON.stringify(status));
+            alert(JSON.stringify(['failed to register ', status]));
+        }
+    );
+
+    //reset badges on app start
+    pushNotification.setApplicationIconBadgeNumber(0);
 }
-
 
 var app = {
     // Application Constructor
@@ -37,15 +55,12 @@ var app = {
         app.receivedEvent('deviceready');
     },
 
-
-
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         console.log('Received Event: ' + id);
-
         LoadScripts();
-
         callHome();
+
         document.addEventListener("pause", app.onPause, false);
         document.addEventListener("backbutton", app.onBackKeyDown, false);
         document.addEventListener("menubutton", app.onMenuKeyDown, false);
@@ -90,38 +105,34 @@ var app = {
     //    }
     //},
 
-    onResume: function () {
-        //navigator.splashscreen.hide();
-        setTimeout(function () {
-            navigator.splashscreen.hide();
-        }, 2000);
-        // Handle the back button
-    },
-
     onPause: function () {
         //navigator.splashscreen.show();
         // Handle the back button
     },
 
     onBackKeyDown: function () {
-
-        if (localStorage.page != "home") {
-            var counter = 0;
-            $('.colapseAll').each(function () {
-                if ($(this).hasClass('ui-collapsible-collapsed')) {
-                    counter++;
+        e.preventDefault();
+        if (!$("#preloader").hasClass('hide')) {
+            $("#preloader").addClass('hide');
+        }
+        else {
+            if (localStorage.page == "page") {
+                if ($(".colapseAll:not(.ui-collapsible-collapsed)").length > 0) {
+                    $(".colapseAll").collapsible("option", "collapsed", true);
                 }
-            });
-            if (counter == $(".colapseAll").length) {
+                else {
+                    $("#preloader").removeClass("hide");
+                    callAjaxHome();
+                }
+            }
+            else if (localStorage.page != "home") {
+                $("#preloader").removeClass("hide");
                 callAjaxHome();
             }
             else {
-                $(".colapseAll").collapsible("option", "collapsed", true);
-            }
-        }
-        else {
-            if (confirm('Are you sure you want to exit the app?')) {
-                navigator.app.exitApp();
+                if (confirm(Translate(16))) {
+                    navigator.app.exitApp();
+                }
             }
         }
     },
@@ -145,5 +156,6 @@ var app = {
 
     onResume: function () {
         // Handle resume event
+        $("#preloader").addClass("hide");
     }
 };

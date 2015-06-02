@@ -370,6 +370,7 @@ function skipAdd() {
 }
 
 function callAjaxHome() {
+    $("#preloader").removeClass("hide");
     localStorage.page = "home";
     $("#wrap-container").removeClass("otherPage").addClass("homePage");
 
@@ -395,7 +396,7 @@ function callAjaxHome() {
         error: function (error) {
             //console.log('error');
             //console.log(error);
-
+            $("#preloader").addClass("hide");
             navigator.notification.confirm(Translate(11),
                 function (button) {
                 callAjaxHome();
@@ -440,6 +441,7 @@ function callAjaxFavourites() {
                 },
                 error: function (error) {
                     //console.log(error);
+                    $("#preloader").addClass("hide");
                     navigator.notification.confirm(Translate(11), function (button) {
                         callAjaxFavourites();
                     },
@@ -499,6 +501,7 @@ function callAjaxFavourites() {
                 $("#preloader").addClass("hide");
             },
             error: function (error) {
+                $("#preloader").addClass("hide");
                 navigator.notification.confirm(Translate(11), function (button) {
                     callAjaxFavourites();
                 },
@@ -518,23 +521,29 @@ function callAjaxFavourites() {
 }
 
 function callAjaxEvents(tip) {
-    //getUrlVars();
     getLocationAndData(tip);
 }
 
 function callFullAjax(tip, myLong, myLat, date, lang) {
+    $("#preloader").removeClass("hide");
     localStorage.page = "page";
-    //alert("Ajax call=FullAjax, Language=" + localStorage.lang + ", Type=" + tip + ", Unknown, Date=" + localStorage.date + "");
+    makeFullAjax(tip, myLong, myLat, date, lang);
+}
+
+function callShortAjax(tip, date, lang) {
+    $("#preloader").removeClass("hide");
+    localStorage.page = "page";
+    makeShortAjax(tip, date, lang);
+}
+
+function makeShortAjax(tip, date, lang) {
     jQuery.ajax({
-        type: "POST",
+        type: "GET",
         url: "http://www.wazzzapp.net/Mobile/GetCategories",
         crossDomain: true,
-        //beforeSend : function() {$.mobile.loading('show')},
-        //complete : function() {$.mobile.loading('hide')},
-        data: { date: date, type: tip, lang: lang, longi: myLong, lati: myLat, platform: "ios" },
+        data: { date: date, type: tip, lang: lang, platform: "ios" },
         dataType: 'json',
         success: function (data) {
-            clearContainers();
             if (tip == "Day") {
                 $("#DayContainer").html(data["content"]);
                 show("#DayContainer");
@@ -545,75 +554,72 @@ function callFullAjax(tip, myLong, myLat, date, lang) {
             }
             attachSelects();
             attachSelectChangeHandler();
-            //AttachHomeHandlers();
+            ApplyAccordion(".accordion");
+            ApplySnapper();
+            AttachShowMoreHandlers();
+            AttachAddToFavouritesHandlers();
+            attachEventHandlers();
+            $("#preloader").addClass("hide");
+        },
+        error: function () {
+            $("#preloader").addClass("hide");
+            navigator.notification.confirm(Translate(11), function (button) {
+                if (button == 1) {
+                    callShortAjax(tip, date, lang);
+                }
+                else {
+                    $("#preloader").addClass("hide");
+                }
+
+            },
+                "WazzzApp Frankfurt",
+                Translate(17) + "," + Translate(18));
+        }
+    });
+}
+
+function makeFullAjax(tip, myLong, myLat, date, lang) {
+    jQuery.ajax({
+        type: "POST",
+        url: "http://www.wazzzapp.net/Mobile/GetCategories",
+        crossDomain: true,
+        data: { date: date, type: tip, lang: lang, longi: myLong, lati: myLat, platform: "ios" },
+        dataType: 'json',
+        success: function (data) {
+            if (tip == "Day") {
+                $("#DayContainer").html(data["content"]);
+                show("#DayContainer");
+            }
+            else {
+                $("#NightContainer").html(data["content"]);
+                show("#NightContainer");
+            }
+            attachSelects();
+            attachSelectChangeHandler();
             ApplyAccordion(".accordion");
             ApplySnapper();
             CloseSnapper();
             AttachShowMoreHandlers();
             attachEventHandlers();
-            AttachBackButton();
             AttachAddToFavouritesHandlers();
-
-            //SocialSharing();
             $("#preloader").addClass("hide");
 
         },
         error: function () {
-            //console.log('error');
-            //console.log(error);
-            navigator.notification.alert(Translate(14), function (button) { 
-                callFullAjax(tip, myLong, myLat, date, lang);
-            }, "WazzzApp Frankfurt", "Ok");
-        }
-    });
-}
-
-function callShortAjax(tip, date, lang) {
-    localStorage.page = "page";
-    //alert("Ajax call=ShortAjax, Language=" + localStorage.lang + ", Type=" + tip + ", Unknown, Date=" + localStorage.date + "");
-    jQuery.ajax({
-        type: "GET",
-        url: "http://www.wazzzapp.net/Mobile/GetCategories",
-        crossDomain: true,
-        //beforeSend : function() {$.mobile.loading('show')},
-        //complete : function() {$.mobile.loading('hide')},
-        //data: { date:date, type : section, lang:lang},
-        data: { date: date, type: tip, lang: lang, platform: "ios" },
-        dataType: 'json',
-        success: function (data) {
-            clearContainers();
-            if (tip == "Day") {
-                $("#DayContainer").html(data["content"]);
-                show("#DayContainer");
-            }
-            else {
-                $("#NightContainer").html(data["content"]);
-                show("#NightContainer");
-            }
-            //AttachHomeHandlers();
-            attachSelects();
-            attachSelectChangeHandler();
-            ApplyAccordion(".accordion");
-            ApplySnapper();
-            //CloseSnapper();
-            AttachShowMoreHandlers();
-            AttachAddToFavouritesHandlers();
-            attachEventHandlers();
-            AttachBackButton();
-            //SocialSharing();
             $("#preloader").addClass("hide");
+            navigator.notification.confirm(Translate(11), function (button) {
+                if (button == 1) {
+                    callFullAjax(tip, myLong, myLat, date, lang);
+                }
+                else {
+                    $("#preloader").addClass("hide");
+                }
 
-        },
-        error: function () {
-            //console.log('error');
-            //console.log(error);
-
-            navigator.notification.alert(Translate(11), function (button) {
-                callShortAjax(tip, date, lang);
-            }, "WazzzApp Frankfurt", "Ok");
+            },
+       "WazzzApp Frankfurt",
+       Translate(17) + "," + Translate(18));
         }
     });
-    //alertError();
 }
 
 //Helper functions
