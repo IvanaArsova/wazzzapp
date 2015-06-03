@@ -227,6 +227,12 @@ function Back() {
                     callAjaxHome();
                 }
             }
+            else if (localStorage.page == "favs") {
+                $("#preloader").removeClass("hide");
+                callAjaxHome();
+            }
+            else {
+            }
         }
         //if (localStorage.page != "home") {
         //    var counter = 0;
