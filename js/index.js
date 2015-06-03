@@ -8,7 +8,8 @@ function initPushwoosh() {
         var notification = event.notification;
 
         //display alert to the user for example
-        alert(notification.aps.alert);
+        //alert(notification.aps.alert);
+        navigator.notification.alert(notification.aps.alert, function () { }, "WazzzApp Frankfurt", "Ok");
 
         //clear the app badge
         pushNotification.setApplicationIconBadgeNumber(0);

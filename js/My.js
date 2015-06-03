@@ -213,24 +213,39 @@ function AttachBackButton() {
 }
 
 function Back() {
-    //e.preventDefault();
-    if (localStorage.page != "home") {
-        var counter = 0;
-        $('.colapseAll').each(function () {
-            if ($(this).hasClass('ui-collapsible-collapsed')) {
-                counter++;
-            }
-        });
-        if (counter == $(".colapseAll").length) {
-            $("#preloader").removeClass("hide");
-            setTimeout(function () {
-                callAjaxHome();
-            }, 100);
+    setTimeout(function () {
+        if (!$("#preloader").hasClass('hide')) {
+            $("#preloader").addClass('hide');
         }
         else {
-            $(".colapseAll").collapsible("option", "collapsed", true);
+            if (localStorage.page == "page") {
+                if ($(".colapseAll:not(.ui-collapsible-collapsed)").length > 0) {
+                    $(".colapseAll").collapsible("option", "collapsed", true);
+                }
+                else {
+                    $("#preloader").removeClass("hide");
+                    callAjaxHome();
+                }
+            }
         }
-    }
+        //if (localStorage.page != "home") {
+        //    var counter = 0;
+        //    $('.colapseAll').each(function () {
+        //        if ($(this).hasClass('ui-collapsible-collapsed')) {
+        //            counter++;
+        //        }
+        //    });
+        //    if (counter == $(".colapseAll").length) {
+        //        $("#preloader").removeClass("hide");
+        //        setTimeout(function () {
+        //            callAjaxHome();
+        //        }, 100);
+        //    }
+        //    else {
+        //        $(".colapseAll").collapsible("option", "collapsed", true);
+        //    }
+        //}
+    }, 300);
 }
 
 function AttachRemoveFromFavouritesHandlers() {
@@ -559,6 +574,7 @@ function makeShortAjax(tip, date, lang) {
             AttachShowMoreHandlers();
             AttachAddToFavouritesHandlers();
             attachEventHandlers();
+            AttachBackButton();
             $("#preloader").addClass("hide");
         },
         error: function () {
@@ -602,6 +618,7 @@ function makeFullAjax(tip, myLong, myLat, date, lang) {
             AttachShowMoreHandlers();
             attachEventHandlers();
             AttachAddToFavouritesHandlers();
+            AttachBackButton();
             $("#preloader").addClass("hide");
 
         },
